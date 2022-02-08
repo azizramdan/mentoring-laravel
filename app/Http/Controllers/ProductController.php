@@ -110,6 +110,8 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        return 'submit hapus produk' . $id;
+        Product::where('id', $id)->delete();
+
+        return redirect('/products')->with('success', 'Berhasil hapus produk');
     }
 }

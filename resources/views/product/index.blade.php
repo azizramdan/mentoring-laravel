@@ -33,7 +33,11 @@ List produk
                 <td>
                     <a href="/products/{{ $product->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
                     <a href="/products/{{ $product->id }}" class="btn btn-sm btn-success">Detail</a>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
+                    <form action="/products/{{ $product->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
