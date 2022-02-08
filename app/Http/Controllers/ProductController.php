@@ -69,45 +69,31 @@ class ProductController extends Controller
         return redirect('/products')->with('success', 'Berhasil menambah produk baru');
     }
 
-    public function show($id)
+    public function show(Product $product)
     {
-        // $product = DB::select('SELECT * FROM products WHERE id = ?', [$id]);
-
-        // $product = DB::table('products')->where('id', $id)->first();
-
-        $product = Product::findOrFail($id);
-
-        // dd($product);
-
         return view('product.show', [
             'product' => $product
         ]);
     }
 
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail($id);
-
         return view('product.edit', [
             'product' => $product,
         ]);
     }
 
-    public function update(UpdateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $validated = $request->validated();
-
-        $product = Product::findOrFail($id);
 
         $product->update($validated);
 
         return redirect('/products')->with('success', 'Berhasil mengubah produk');
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
-
         $product->delete();
 
         return redirect('/products')->with('success', 'Berhasil hapus produk');
