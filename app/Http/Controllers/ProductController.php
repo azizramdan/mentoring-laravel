@@ -75,7 +75,7 @@ class ProductController extends Controller
 
         // $product = DB::table('products')->where('id', $id)->first();
 
-        $product = Product::where('id', $id)->first();
+        $product = Product::findOrFail($id);
 
         // dd($product);
 
@@ -86,7 +86,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::where('id', $id)->first();
+        $product = Product::findOrFail($id);
 
         return view('product.edit', [
             'product' => $product,
@@ -97,14 +97,18 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
 
-        Product::where('id', $id)->update($validated);
+        $product = Product::findOrFail($id);
+
+        $product->update($validated);
 
         return redirect('/products')->with('success', 'Berhasil mengubah produk');
     }
 
     public function destroy($id)
     {
-        Product::where('id', $id)->delete();
+        $product = Product::findOrFail($id);
+
+        $product->delete();
 
         return redirect('/products')->with('success', 'Berhasil hapus produk');
     }
