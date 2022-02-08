@@ -6,6 +6,13 @@ List produk
 
 @section('content')
 <div class="text-end"><a href="/products/create" class="btn btn-primary">Tambah</a></div>
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <table class="table mt-4">
     <thead>
         <tr>

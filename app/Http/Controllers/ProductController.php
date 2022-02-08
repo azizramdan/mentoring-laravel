@@ -68,7 +68,7 @@ class ProductController extends Controller
         //     ],
         // ]);
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Berhasil menambah produk baru');
     }
 
     public function show($id)
@@ -105,7 +105,7 @@ class ProductController extends Controller
 
         Product::where('id', $id)->update($validated);
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Berhasil mengubah produk');
     }
 
     public function destroy($id)
