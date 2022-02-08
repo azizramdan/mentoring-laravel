@@ -88,12 +88,24 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        return view('product.edit');
+        $product = Product::where('id', $id)->first();
+
+        return view('product.edit', [
+            'product' => $product,
+        ]);
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        return 'submit update produk';
+        $validated = $request->validate([
+            'name' => ['required', 'string'],
+            'price' => ['required', 'integer', 'min:1000'],
+            'description' => ['nullable', 'string'],
+        ]);
+
+        Product::where('id', $id)->update($validated);
+
+        return redirect('/products');
     }
 
     public function destroy($id)

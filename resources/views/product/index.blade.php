@@ -24,7 +24,7 @@ List produk
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->description }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary">Edit</button>
+                    <a href="/products/{{ $product->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
                     <a href="/products/{{ $product->id }}" class="btn btn-sm btn-success">Detail</a>
                     <button class="btn btn-sm btn-danger">Hapus</button>
                 </td>
