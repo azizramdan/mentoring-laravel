@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,13 +30,9 @@ class ProductController extends Controller
         return view('product.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string'],
-            'price' => ['required', 'integer', 'min:1000'],
-            'description' => ['nullable', 'string'],
-        ]);
+        $validated = $request->validated();
 
         Product::create($validated);
 
@@ -95,13 +93,9 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string'],
-            'price' => ['required', 'integer', 'min:1000'],
-            'description' => ['nullable', 'string'],
-        ]);
+        $validated = $request->validated();
 
         Product::where('id', $id)->update($validated);
 
