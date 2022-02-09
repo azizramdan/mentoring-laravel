@@ -36,3 +36,5 @@ Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth
 Route::get('login', [LoginController::class, 'form'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login']);
 
+Route::post('logout', [LoginController::class, 'logout']);
+

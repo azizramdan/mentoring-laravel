@@ -35,9 +35,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item" onclick="$('#logout-btn').click()">
+            <i class="fas fa-envelope mr-2"></i> Logout
+          </a>
+        </div>
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
+
+  <form action="/logout" method="post">
+    @csrf
+    <button class="d-none" id="logout-btn"></button>
+  </form>
 
   <!-- Main Sidebar Container -->
   @include('dashboard.layout.sidebar')
