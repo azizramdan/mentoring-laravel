@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,6 @@ Route::get('products/{product}/edit', [ProductController::class, 'edit']);
 Route::patch('products/{product}', [ProductController::class, 'update']);
 
 Route::delete('products/{product}', [ProductController::class, 'destroy']);
+
+Route::get('dashboard', [DashboardController::class, 'index']);
 
