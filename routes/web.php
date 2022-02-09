@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('landingpage');
 
 Route::get('products', [ProductController::class, 'index']);
 
@@ -31,8 +31,8 @@ Route::patch('products/{product}', [ProductController::class, 'update']);
 
 Route::delete('products/{product}', [ProductController::class, 'destroy']);
 
-Route::get('dashboard', [DashboardController::class, 'index']);
+Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('login', [LoginController::class, 'form']);
+Route::get('login', [LoginController::class, 'form'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login']);
 
