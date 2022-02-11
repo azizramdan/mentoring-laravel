@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\LoginController;
@@ -27,6 +28,8 @@ Route::post('logout', [LoginController::class, 'logout']);
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+    
+    Route::resource('categories', CategoryController::class);
 
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index']);
