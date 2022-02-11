@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,22 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 })->name('landingpage');
 
-Route::get('products', [ProductController::class, 'index']);
-
-Route::get('products/create', [ProductController::class, 'create']);
-Route::post('products', [ProductController::class, 'store']);
-
-Route::get('products/{product}', [ProductController::class, 'show']);
-
-Route::get('products/{product}/edit', [ProductController::class, 'edit']);
-Route::patch('products/{product}', [ProductController::class, 'update']);
-
-Route::delete('products/{product}', [ProductController::class, 'destroy']);
-
-Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('login', [LoginController::class, 'form'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login']);
 
 Route::post('logout', [LoginController::class, 'logout']);
 
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+
+    Route::prefix('products')->group(function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::get('create', [ProductController::class, 'create']);
+        Route::post('/', [ProductController::class, 'store']);
+        Route::get('{product}', [ProductController::class, 'show']);
+        Route::get('{product}/edit', [ProductController::class, 'edit']);
+        Route::patch('{product}', [ProductController::class, 'update']);
+        Route::delete('{product}', [ProductController::class, 'destroy']);
+    });
+});
