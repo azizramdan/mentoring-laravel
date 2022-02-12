@@ -28,6 +28,7 @@ class StoreProductRequest extends FormRequest
             'category_id' => ['required', 'numeric'],
             'price' => ['required', 'integer', 'min:1000'],
             'description' => ['nullable', 'string'],
+            'image' => ['required', 'image'],
         ];
     }
 }

@@ -14,6 +14,7 @@
     <div class="card-body">
         <div class="card">
             <div class="card-body">
+                <img src="{{ asset('/storage/' . $product->image) }}" class="img-thumbnail" width="100px" >
                 <div class="row">
                     <div class="col-2">ID</div>
                     <div class="col">{{ $product->id }}</div>

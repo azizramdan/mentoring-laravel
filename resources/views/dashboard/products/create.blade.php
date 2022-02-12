@@ -12,7 +12,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="/dashboard/products">
+        <form method="POST" action="/dashboard/products" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -36,6 +36,16 @@
                 <label for="price" class="form-label">Price</label>
                 <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}">
                 @error('price')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <div class="custom-file" id="image">
+                    <input type="file" class="custom-file-input" id="image" name="image">
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
+                @error('image')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

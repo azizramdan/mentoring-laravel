@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -36,6 +37,10 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
 
+        $path = $request->file('image')->store('images');
+
+        $validated['image'] = $path;
+
         Product::create($validated);
 
         return redirect('/dashboard/products')->with('success', 'Berhasil menambah produk baru');
@@ -61,6 +66,15 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images');
+            $validated['image'] = $path;
+
+            Storage::delete($product->image);
+        } else {
+            unset($validated['image']);
+        }
 
         $product->update($validated);
 
