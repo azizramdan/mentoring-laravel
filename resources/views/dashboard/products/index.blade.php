@@ -23,6 +23,7 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Price</th>
                     <th scope="col">Description</th>
                     <th scope="col">Action</th>
@@ -33,6 +34,7 @@
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
+                    <td>{{ $product->category->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->description }}</td>
                     <td>

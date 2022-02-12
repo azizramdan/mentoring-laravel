@@ -23,6 +23,17 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="name" class="form-label">Category</label>
+                <select class="custom-select" id="category-id" name="category_id">
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
+                  </select>
+                @error('category_id')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
                 <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}">
                 @error('price')
