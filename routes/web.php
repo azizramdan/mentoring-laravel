@@ -22,12 +22,12 @@ Route::get('/', function () {
 
 
 Route::get('login', [LoginController::class, 'form'])->name('login')->middleware('guest');
-Route::post('login', [LoginController::class, 'login']);
+Route::post('login', [LoginController::class, 'login'])->middleware('guest');
 
-Route::post('logout', [LoginController::class, 'logout']);
+Route::post('logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::prefix('dashboard')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
     
     Route::resource('categories', CategoryController::class);
 
