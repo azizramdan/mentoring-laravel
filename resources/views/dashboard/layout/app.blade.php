@@ -37,6 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
+          {{ auth()->user()->name }}
           <i class="far fa-bell"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
