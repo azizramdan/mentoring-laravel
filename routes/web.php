@@ -26,7 +26,7 @@ Route::post('login', [LoginController::class, 'login'])->middleware('guest');
 
 Route::post('logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::prefix('dashboard')->middleware(['auth', 'is_admin'])->group(function () {
+Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     
     Route::resource('categories', CategoryController::class);
@@ -42,7 +42,7 @@ Route::prefix('dashboard')->middleware(['auth', 'is_admin'])->group(function () 
     });
 });
 
-Route::prefix('pembeli')->middleware('is_pembeli')->group(function () {
+Route::prefix('pembeli')->middleware('role:pembeli')->group(function () {
     Route::get('/', function () {
         return 'ini halaman pembeli';
     });
