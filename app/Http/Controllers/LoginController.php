@@ -9,6 +9,7 @@ class LoginController extends Controller
 {
     public function form()
     {
+        logger('ini log dari controller');
         return view('auth.login');
     }
 

@@ -26,7 +26,7 @@ Route::post('login', [LoginController::class, 'login'])->middleware('guest');
 
 Route::post('logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::prefix('dashboard')->middleware('auth')->group(function () {
+Route::prefix('dashboard')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     
     Route::resource('categories', CategoryController::class);
@@ -39,5 +39,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::get('{product}/edit', [ProductController::class, 'edit']);
         Route::patch('{product}', [ProductController::class, 'update']);
         Route::delete('{product}', [ProductController::class, 'destroy']);
+    });
+});
+
+Route::prefix('pembeli')->middleware('is_pembeli')->group(function () {
+    Route::get('/', function () {
+        return 'ini halaman pembeli';
     });
 });
