@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('qty');
             $table->unsignedBigInteger('total');
             $table->string('status')->default('menunggu');
+            $table->text('address');
             $table->timestamps();
         });
     }

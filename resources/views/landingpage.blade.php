@@ -14,7 +14,7 @@
                 <p class="card-text">{{ $product->description ?? '-' }}</p>
                 <h6><b>Rp. {{ number_format($product->price) }}</b></h6>
                 <div class="d-grid">
-                    <a href="#" class="btn btn-primary mt-2">Beli</a>
+                    <a href="/checkout/{{ $product->id }}" class="btn btn-primary mt-2">Beli</a>
                 </div>
             </div>
         </div>

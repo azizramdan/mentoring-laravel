@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,4 +46,11 @@ Route::prefix('pembeli')->middleware('role:pembeli')->group(function () {
     Route::get('/', function () {
         return 'ini halaman pembeli';
     });
+});
+
+Route::get('/checkout/{product}', [OrderController::class, 'checkout'])->middleware(['auth', 'role:pembeli']);
+
+Route::prefix('orders')->middleware(['auth', 'role:pembeli'])->group(function () {
+    Route::post('/', [OrderController::class, 'store']);
+    Route::get('{order}', [OrderController::class, 'show']);
 });
