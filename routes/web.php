@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\OrderController as DashboardOrderController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\LoginController;
@@ -39,6 +40,12 @@ Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function (
         Route::get('{product}/edit', [ProductController::class, 'edit']);
         Route::patch('{product}', [ProductController::class, 'update']);
         Route::delete('{product}', [ProductController::class, 'destroy']);
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [DashboardOrderController::class, 'index']);
+        Route::get('{order}', [DashboardOrderController::class, 'show']);
+        Route::patch('{order}', [DashboardOrderController::class, 'update']);
     });
 });
 
