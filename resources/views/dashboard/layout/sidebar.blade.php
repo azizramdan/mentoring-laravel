@@ -11,7 +11,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="/dashboard/categories" class="nav-link">
+                    <a href="/dashboard/categories" class="nav-link {{ request()->is('dashboard/categories*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Categories
@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/dashboard/products" class="nav-link">
+                    <a href="/dashboard/products" class="nav-link {{ request()->is('dashboard/products*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Products
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/dashboard/orders" class="nav-link">
+                    <a href="/dashboard/orders" class="nav-link {{ request()->is('dashboard/orders*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Orders

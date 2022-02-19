@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Beranda</a>
+                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="/">Beranda</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/orders">Orders</a>
+                    <li class="nav-item ">
+                        <a class="nav-link {{ request()->is('orders*') ? 'active' : '' }} " href="/orders">Orders</a>
                     </li>
                 </ul>
             </div>
