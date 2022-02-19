@@ -33,10 +33,10 @@ class OrderController extends Controller
     {
         $status = $order->status;
 
-        if ($status == 'dibayar') {
-            $status = 'diproses';
-        } elseif ($status == 'diproses') {
-            $status = 'dikirim';
+        if ($status == Order::STATUS_DIBAYAR) {
+            $status = Order::STATUS_DIPROSES;
+        } elseif ($status == Order::STATUS_DIPROSES) {
+            $status = Order::STATUS_DIKIRIM;
         } else {
             abort(500, 'Data tidak valid');
         }

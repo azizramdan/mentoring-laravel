@@ -64,14 +64,13 @@ class OrderController extends Controller
 
         $status = $order->status;
 
-        if ($status == 'menunggu') {
-            $status = 'dibayar';
-        } elseif ($status == 'dikirim') {
-            $status = 'selesai';
+        if ($status == Order::STATUS_MENUNGGU) {
+            $status = Order::STATUS_DIBAYAR;
+        } elseif ($status == Order::STATUS_DIKIRIM) {
+            $status = Order::STATUS_SELESAI;
         } else {
             abort(500, 'Data tidak valid');
         }
-
 
         $order->update([
             'status' => $status

@@ -18,6 +18,12 @@ class Order extends Model
         'address',
     ];
 
+    const STATUS_MENUNGGU = 'menunggu';
+    const STATUS_DIBAYAR = 'dibayar';
+    const STATUS_DIPROSES = 'diproses';
+    const STATUS_DIKIRIM = 'dikirim';
+    const STATUS_SELESAI = 'selesai';
+
     public function user()
     {
         return $this->belongsTo(User::class);
