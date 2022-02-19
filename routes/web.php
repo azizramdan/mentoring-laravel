@@ -53,4 +53,5 @@ Route::get('/checkout/{product}', [OrderController::class, 'checkout'])->middlew
 Route::prefix('orders')->middleware(['auth', 'role:pembeli'])->group(function () {
     Route::post('/', [OrderController::class, 'store']);
     Route::get('{order}', [OrderController::class, 'show']);
+    Route::post('{order}/pay', [OrderController::class, 'pay']);
 });

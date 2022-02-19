@@ -42,6 +42,21 @@ class OrderController extends Controller
             abort(404);
         }
 
-        dd($order);
+        $order->load(['product.category']);
+
+        return view('orders.show', compact('order'));
+    }
+
+    public function pay(Order $order)
+    {
+        if ($order->user_id != auth()->id()) {
+            abort(404);
+        }
+
+        $order->update([
+            'status' => 'dibayar'
+        ]);
+
+        return redirect()->back()->with('success', 'Pesanan berhasil dibayar');
     }
 }
