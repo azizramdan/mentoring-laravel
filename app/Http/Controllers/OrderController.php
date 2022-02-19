@@ -17,6 +17,15 @@ class OrderController extends Controller
         return view('orders.checkout', compact('product'));
     }
 
+    public function index()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->with(['product.category'])
+            ->paginate();
+
+        return view('orders.index', compact('orders'));
+    }
+
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
@@ -47,16 +56,27 @@ class OrderController extends Controller
         return view('orders.show', compact('order'));
     }
 
-    public function pay(Order $order)
+    public function update(Order $order)
     {
         if ($order->user_id != auth()->id()) {
             abort(404);
         }
 
+        $status = $order->status;
+
+        if ($status == 'menunggu') {
+            $status = 'dibayar';
+        } elseif ($status == 'dikirim') {
+            $status = 'selesai';
+        } else {
+            abort(500, 'Data tidak valid');
+        }
+
+
         $order->update([
-            'status' => 'dibayar'
+            'status' => $status
         ]);
 
-        return redirect()->back()->with('success', 'Pesanan berhasil dibayar');
+        return redirect()->back()->with('success', 'Berhasil mengubah pesanan ke ' . $status);
     }
 }

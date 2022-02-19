@@ -21,12 +21,18 @@
         <div>Alamat: {{ $order->address }}</div>
         <div>Status order: {{ $order->status }}</div>
 
-        @if ($order->status == 'menunggu')
-        <form action="/orders/{{ $order->id }}/pay" method="post">
+        <form action="/orders/{{ $order->id }}" method="post">
             @csrf
+            @method('patch')
+
+            @if ($order->status == 'menunggu')
             <button class="btn btn-primary mt-5">Konfirmasi saya sudah bayar</button>
+            @endif
+
+            @if ($order->status == 'dikirim')
+            <button class="btn btn-primary mt-5">Konfirmasi pesanan sudah sampai</button>
+            @endif
         </form>
-        @endif
     </div>
 </div>
 @endsection

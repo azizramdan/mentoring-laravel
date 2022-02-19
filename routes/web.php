@@ -58,7 +58,8 @@ Route::prefix('pembeli')->middleware('role:pembeli')->group(function () {
 Route::get('/checkout/{product}', [OrderController::class, 'checkout'])->middleware(['auth', 'role:pembeli']);
 
 Route::prefix('orders')->middleware(['auth', 'role:pembeli'])->group(function () {
+    Route::get('/', [OrderController::class, 'index']);
     Route::post('/', [OrderController::class, 'store']);
     Route::get('{order}', [OrderController::class, 'show']);
-    Route::post('{order}/pay', [OrderController::class, 'pay']);
+    Route::patch('{order}', [OrderController::class, 'update']);
 });
