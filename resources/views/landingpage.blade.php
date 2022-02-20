@@ -13,6 +13,7 @@
                 <h5 class="card-title">{{ $product->name }}</h5>
                 <p class="card-text">{{ $product->description ?? '-' }}</p>
                 <h6><b>Rp. {{ number_format($product->price) }}</b></h6>
+                <h6>Stok: {{ $product->stock }}</h6>
                 <div class="d-grid">
                     <a href="/checkout/{{ $product->id }}" class="btn btn-primary mt-2">Beli</a>
                 </div>

@@ -9,7 +9,9 @@ class LandingpageController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->paginate(9);
+        $products = Product::where('stock', '>', 0)
+            ->with('category')
+            ->paginate(9);
 
         return view('landingpage', compact('products'));
     }

@@ -26,7 +26,7 @@
     </div>
     <div class="mb-3">
         <label for="qty" class="form-label">Qty</label>
-        <input type="number" class="form-control" id="qty" name="qty" value="{{ old('qty') }}" min="1" required>
+        <input type="number" class="form-control" id="qty" name="qty" value="{{ old('qty') }}" min="1" max="{{ $product->stock }}" required>
         @error('qty')
         <small class="text-danger">{{ $message }}</small>
         @enderror

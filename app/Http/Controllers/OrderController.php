@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -31,17 +32,27 @@ class OrderController extends Controller
         $validated = Validator::make($request->all(), [
             'product_id' => ['required', 'integer', 'exists:products,id'],
             'address' => ['required', 'string'],
-            'qty' => ['required', 'numeric', 'min:1'],
         ])->validate();
 
         $product = Product::find($validated['product_id']);
+        $stock = $product->stock;
 
-        $validated['total'] = $product->price * $validated['qty'];
+        $validatedQty = Validator::make($request->all(), [
+            'qty' => ['required', 'numeric', 'min:1', "max:$stock"],
+        ])->validate();
+
+        $validated['total'] = $product->price * $validatedQty['qty'];
         $validated['user_id'] = auth()->id();
-        $validated['status'] = 'menunggu';
+        $validated['status'] = Order::STATUS_MENUNGGU;
+        $validated['qty'] = $validatedQty['qty'];
 
-        $order = Order::create($validated);
-        
+        $order = (object) [];
+
+        DB::transaction(function () use ($validated, $product, &$order) {
+            $order = Order::create($validated);
+            $product->decrement('stock', $validated['qty']);
+        });
+
         return redirect('/orders/' . $order->id)->with('success', 'Berhasil membuat order');
     }
 
