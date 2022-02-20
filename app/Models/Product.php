@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function scopeAvailable($query, $stock = 0)
+    {
+        $query->where('stock', '>', $stock);
+    }
 }

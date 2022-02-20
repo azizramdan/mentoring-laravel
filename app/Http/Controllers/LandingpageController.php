@@ -15,7 +15,7 @@ class LandingpageController extends Controller
         $sort = $request->sort;
         $sortOrder = $request->sort_order;
 
-        $products = Product::where('stock', '>', 0)
+        $products = Product::available()
             ->with(['category']);
 
         if ($category) {
