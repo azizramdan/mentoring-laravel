@@ -37,8 +37,15 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}">
+                <input type="number" class="form-control" id="price" name="price" min="1000" value="{{ $product->price }}">
                 @error('price')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" id="stock" name="stock" min="1" value="{{ $product->stock }}">
+                @error('stock')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

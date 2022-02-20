@@ -15,9 +15,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::select('id', 'name', 'price', 'description', 'category_id')
+        $products = Product::select('id', 'name', 'price', 'stock', 'category_id')
             ->with('category')
-            ->get();
+            ->paginate();
 
         return view('dashboard.products.index', [
             'products' => $products
