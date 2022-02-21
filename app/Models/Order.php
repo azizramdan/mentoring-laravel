@@ -23,6 +23,7 @@ class Order extends Model
     const STATUS_DIPROSES = 'diproses';
     const STATUS_DIKIRIM = 'dikirim';
     const STATUS_SELESAI = 'selesai';
+    const STATUS_KADALUARSA = 'kadaluarsa';
 
     public function user()
     {
