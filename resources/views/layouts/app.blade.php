@@ -10,6 +10,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>@yield('title')</title>
+    {{-- <style>
+        #test1 #test1-1 {
+            background-color: aqua
+        }
+        #test1 #test1-2 {
+            background-color: red
+        }
+    </style> --}}
+
+    <link rel="stylesheet" href="{{ mix('css/test.css') }}">
 </head>
 
 <body>
@@ -33,6 +43,11 @@
     </nav>
     <div class="container mt-3">
         @yield('content')
+        <div id="test1">
+            <div id="test1-1">1-1</div>
+            <div id="test1-2">1-2</div>
+        </div>
+        <div class="my-5"></div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -45,6 +60,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
+    <script src="{{ mix('/js/test.js') }}"></script>
+    <script>
+        async function getData() {
+            const response = await axios.get('/api/test')
+    
+            console.log(response.data.data);
+        }
+
+        // getData()
+
+        axios.get('/api/test')
+            .then((response) => {
+                console.log(response.data.data);
+            })
+    </script>
     @stack('script')
 </body>
 

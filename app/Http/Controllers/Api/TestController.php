@@ -12,6 +12,6 @@ class TestController extends Controller
     {
         $response = Http::get('https://quran-endpoint.vercel.app/quran');
 
-        dd($response->collect());
+        return response()->json($response->json());
     }
 }
