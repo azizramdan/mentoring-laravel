@@ -15,7 +15,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('check:expired-order')->everyTenMinutes();
+        
+        $schedule->call(function () {
+                logger('ini dari scheduler ' . now()->toDateTimeString());
+            })
+            ->everyMinute()
+            ->before(function () {
+                logger('before');
+            })
+            ->after(function () {
+                logger('after');
+            });
     }
 
     /**
